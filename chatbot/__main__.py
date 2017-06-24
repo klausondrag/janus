@@ -91,8 +91,8 @@ class Handler(backends.Handler):
         if len(contact_list) > 1:
             message.reply("Aha, Mr. rich bitch has many friends it seems.")
             message.reply("Who will be the lucky one? Type the number")
-            for contact in contact_list:
-                message.reply('1) {}'.format(contact.name))
+            for i, contact in enumerate(contact_list, 1):
+                message.reply('{}) {}'.format(i, contact.name))
             state.name = 'get_contact_from_index'
             state.data = {'follow_up': 'send_money', 'data': send_data}
             return
