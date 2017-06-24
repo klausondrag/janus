@@ -1,0 +1,13 @@
+{
+  "telegram": {
+    "token": "INSERT TOKEN HERE"
+  },
+  "slack": {
+    "token": "INSERT TOKEN HERE",
+    "botname": "janusbankbot"
+  },
+  "wit": {
+    "token": "INSERT TOKEN HERE"
+  },
+  "debug": false
+}

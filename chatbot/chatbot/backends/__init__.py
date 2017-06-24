@@ -18,50 +18,41 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import json
-import functools
-import logging
-import traceback
-import sys
-from telegram.ext import Updater, MessageHandler, Filters
-from wit import Wit
-
-with open('config.json') as fp:
-    config = json.load(fp)
-
-logging.basicConfig(level=logging.INFO)
-wit = Wit(access_token=config['wit_token'])
+import abc
+import typing
 
 
-def handler(func):
+class User(object):
     """
-    Decorator for handlers that catches errors.
+    Represents a user.
     """
 
-    def wrapper(bot, update):
-        try:
-            return func(bot, update)
-        except:
-            exc_string = traceback.format_exc()
-            if config.get('debug'):
-                update.message.reply_text(exc_string)
-            raise
+    def __init__(self, id: str, name: str):
+        self.id = id
+        self.name = name
 
-    return wrapper
+    def __str__(self):
+        return str(self.name)
 
 
-@handler
-def reply(bot, update):
-    logging.info('Received message from %s', update.message.from_user['username'])
-    update.message.reply_text(update.message.text)
+class Message(object, metaclass=abc.ABCMeta):
+    """
+    Represents a message that is sent by a user to the chatbot.
+    """
+
+    def __init__(self, id: str, text: str, user: User):
+        self.id = id
+        self.text = text
+        self.user = user
+
+    @abc.abstractmethod
+    def reply(self, text):
+        pass
 
 
-def main():
-    updater = Updater(config['telegram_token'])
-    updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
-    updater.start_polling()
-    updater.idle()
+class Handler(object):
 
+    @abc.abstractmethod
+    def handle_message(self, message):
+        pass
 
-if __name__ == '__main__':
-    main()
