@@ -5,6 +5,7 @@ from .mock import User, Contact as BEContact, FigoConnector
 from . import transformer as t
 from ETL_figo_DB.dao import DAO
 from ETL_figo_DB.etl import ETL
+from ETL_figo_DB.transaction import Transaction
 
 
 def search_contacts(user_id: str, name: str) -> List[BEContact]:
@@ -71,11 +72,18 @@ class PrepareTransaction(object):
 
 
 def update_figo(add_demo_data: bool) -> None:
-    print("!!! NOTE !!! Skipping ETL.update() for now")
-    #ETL.update(add_demo_data)
+    if add_demo_data:
+        print('Updating demo Figo data')
+        ETL.update(add_demo_data)
+    else:
+        print("!!! NOTE !!! Skipping ETL.update() for now")
 
-def poll_errors(user_id: str, throw_error: bool) -> List[Transaction]:
-    etl.update(throw_error)
+def poll_errors(user_id: str) -> List[Transaction]:
+    #etl.update(throw_error)
+    user_id = PrepareTransaction.SlackUserMapping.get(user_id)
+    if user_id is None:
+        return []
+
     dao = DAO(user_id)
     transactions = dao.load_transactions()
     for t in transactions:
