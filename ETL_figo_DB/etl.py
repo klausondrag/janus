@@ -25,6 +25,7 @@ class ETL:
                     contacts.append(transaction.contact)
 
             dao = DAO(key)
+            dao.new_user()
             dao.save_contacts(contacts)
 
             # b. Transform transactions

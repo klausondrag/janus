@@ -10350,6 +10350,621 @@
           "amount": -24.99
         }
       ]
+    },
+    "A1.2": {
+      "contacts": [
+        {
+          "name": "Klaus KG",
+          "iban": "AL47212110090000000235698741",
+          "bic": "OKOYFIHH"
+        },
+        {
+          "name": "Valentin AG",
+          "iban": "BA391290079401028494",
+          "bic": "AABAFI22"
+        },
+        {
+          "name": "Valentin AG Zweitkonto",
+          "iban": "BA391290079401029990",
+          "bic": "AABAFI22"
+        },
+        {
+          "name": "Niklas GmbH",
+          "iban": "CY17002001280000001200527600",
+          "bic": "PSPBFIHH"
+        },
+        {
+          "name": "Thien Inc.",
+          "iban": "GE29NB0000000101904917",
+          "bic": "HANDFIHH"
+        }
+      ],
+      "transactions": [
+        {
+          "id": "T1.1059",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1058",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1057",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1056",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1055",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 100.0
+        },
+        {
+          "id": "T1.1054",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1053",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1052",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 15.0
+        },
+        {
+          "id": "T1.1051",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1050",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1049",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 25.0
+        },
+        {
+          "id": "T1.1048",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1047",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 150.0
+        },
+        {
+          "id": "T1.1046",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1045",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1044",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1043",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 300.0
+        },
+        {
+          "id": "T1.1042",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1041",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.462",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.461",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 150.0
+        },
+        {
+          "id": "T1.460",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.459",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.458",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.457",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.456",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.455",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.454",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.453",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.79",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.78",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 75.0
+        },
+        {
+          "id": "T1.77",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 50.0
+        },
+        {
+          "id": "T1.76",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 60.0
+        },
+        {
+          "id": "T1.75",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.74",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 100.0
+        },
+        {
+          "id": "T1.73",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": -1200.0
+        },
+        {
+          "id": "T1.72",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.71",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 25.0
+        },
+        {
+          "id": "T1.70",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 1200.0
+        },
+        {
+          "id": "T1.69",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": -50.0
+        },
+        {
+          "id": "T1.68",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 70.0
+        },
+        {
+          "id": "T1.67",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 80.0
+        },
+        {
+          "id": "T1.66",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 50.0
+        },
+        {
+          "id": "T1.65",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 300.0
+        },
+        {
+          "id": "T1.64",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 25.0
+        },
+        {
+          "id": "T1.3",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.2",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 200.0
+        },
+        {
+          "id": "T1.1",
+          "contact": {
+            "name": "Sparkonto",
+            "iban": "DE40900900424711951501",
+            "bic": "DEMODE01"
+          },
+          "type": "Standing order",
+          "purpose": "Sparen",
+          "booking_text": "Dauerauftrag",
+          "amount": 15.0
+        }
+      ]
+    },
+    "A1.3": {
+      "contacts": [],
+      "transactions": []
+    },
+    "A1.4": {
+      "contacts": [],
+      "transactions": []
     }
   }
 }
