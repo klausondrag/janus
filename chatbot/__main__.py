@@ -90,9 +90,7 @@ class Handler(backends.Handler):
             return
 
         intent = response['entities']['intent'][0]['value']
-        if valid and intent != 'send_money':
-            valid = False
-        if not valid:
+        if intent != 'send_money':
             # FIXME: Currently we only handle the send_money intent.
             message.reply("This intent is currently not supported ({})".format(intent))
             return
