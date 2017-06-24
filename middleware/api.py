@@ -1,6 +1,6 @@
 from typing import List
 
-from .interface import Contact as MWContact
+from .interface import Contact
 from .mock import User, Contact as BEContact, FigoConnector
 from . import transformer as t
 
@@ -12,7 +12,7 @@ def search_contacts(user_id: str, name: str) -> List[BEContact]:
     return matches
 
 
-def send_money(contact: MWContact, money_amount: int, currency: str) -> bool:
+def send_money(contact: Contact, money_amount: int, currency: str) -> bool:
     return FigoConnector.send_money(t.MWContact_to_BEContact(contact), money_amount, currency)
 
 
