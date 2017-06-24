@@ -120,6 +120,8 @@ class SlackBackend(object):
         # Find the ID of the chatbot.
         users = self.get_users()
         for user in users.values():
+            print(user['name'], user['id'])
+        for user in users.values():
             if user['name'] == self.botname:
                 self.botid = user['id']
                 break
