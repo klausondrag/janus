@@ -33,7 +33,10 @@ class ETL:
                 t = Transaction("230", c, "Remittance", "Illegale Ueberweisung", "Ueberweisung", "-100000.10")
                 transactions.append(t)
 
-            dao.save_transactions(transactions)
+            try:
+                dao.save_transactions(transactions)
+            except KeyError:
+                continue
 
         # 4. Save contacts, transactions and meta (last access)
         pass
