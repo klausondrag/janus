@@ -73,3 +73,16 @@ class PrepareTransaction(object):
 def update_figo(add_demo_data: bool) -> None:
     print("!!! NOTE !!! Skipping ETL.update() for now")
     #ETL.update(add_demo_data)
+
+def poll_errors(user_id: str, throw_error: bool) -> List[Transaction]:
+    etl.update(throw_error)
+    dao = DAO(user_id)
+    transactions = dao.load_transactions()
+    for t in transactions:
+        if t.contact.iban == "GE29NB0000000101904900":
+            return [t]
+
+    return []
+
+if __name__ == '__main__':
+    poll("A1.1", False)
