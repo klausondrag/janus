@@ -9,6 +9,9 @@ class Contact:
         self.iban = iban
         self.bic = bic
 
+    def __str__(self):
+        return str(vars(self))
+
 
 class User:
     def __init__(self, id: str) -> None:
@@ -21,3 +24,9 @@ class User:
         else:
             return [Contact('Niklas', 'DE21 0000', ''),
                     Contact('Thien', 'DE23 0000', '')]
+
+
+class FigoConnector:
+    @staticmethod
+    def send_money(contact: Contact, money_amount: int, currency: str) -> bool:
+        pass
