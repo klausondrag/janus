@@ -1,14 +1,15 @@
-import json
+from .util import to_json
 
 
 class Contact:
-    def __init__(self, name: str, iban: str, bic: str) -> None:
+    def __init__(self, name, iban, bic):
         self.name = name
         self.iban = iban
         self.bic = bic
 
-
-def ContactEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Contact):
-            return "{ \"name\" : " + self.name + ", \"iban\" : " + self.iban + ", \"bic\" : " + self.bic + "}"
+    def to_json(self):
+        return {
+            'name': to_json(self.name),
+            'iban': to_json(self.iban),
+            'bic': to_json(self.bic)
+        }
