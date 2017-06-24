@@ -1,7 +1,6 @@
 {
-  "users" : [
-    {
-      "id" : "1",
+  "users" : {
+    "1" : {
       "contacts" : [
         {
           "name" :  "Klaus KG",
@@ -28,11 +27,8 @@
           "iban" :  "GE29NB0000000101904917",
           "bic" :   "HANDFIHH"
         }
-      ]
-    },
-    {
-      "id" : "2",
-      "contacts" : []
+      ],
+      "transactions" : []
     }
-  ]
+  }
 }
