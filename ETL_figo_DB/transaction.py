@@ -15,7 +15,6 @@ class Transaction:
             raise Exception('invalid type')
 
         self.id = id
-        self.contact = Contact(**contact)
         self.type = type
         self.purpose = purpose
         self.booking_text = booking_text

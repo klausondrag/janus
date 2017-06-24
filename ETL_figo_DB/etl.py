@@ -50,3 +50,6 @@ class ETL:
         t2 = Transaction("2", c2, "jdfk", "jdifjfd", "mdfjkd", "500")
         t3 = Transaction("2", c2, "jkkkkk", "a", "a", "10000")
         return {"A1.1":[t1, t2], "A1.2":[t2, t3]}
+
+if __name__ == '__main__':
+    ETL.update(False)
