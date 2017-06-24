@@ -1,5 +1,5 @@
-Nguyễn Thiện
-Ondrag Klaus
-Rosenstein Niklas
-Shastry Divya
-Zieglmeier Valentin
+* Nguyễn Thiện
+* Ondrag Klaus
+* Rosenstein Niklas
+* Shastry Divya
+* Zieglmeier Valentin

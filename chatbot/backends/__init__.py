@@ -18,23 +18,41 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import json
-from telegram.ext import Updater, MessageHandler, Filters
-
-with open('config.json') as fp:
-  config = json.load(fp)
+import abc
+import typing
 
 
-def reply(bot, update):
-  update.message.reply_text(update.message.text)
+class User(object):
+    """
+    Represents a user.
+    """
+
+    def __init__(self, id: str, name: str):
+        self.id = id
+        self.name = name
+
+    def __str__(self):
+        return str(self.name)
 
 
-def main():
-  updater = Updater(config['token'])
-  updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
-  updater.start_polling()
-  updater.idle()
+class Message(object, metaclass=abc.ABCMeta):
+    """
+    Represents a message that is sent by a user to the chatbot.
+    """
+
+    def __init__(self, id: str, text: str, user: User):
+        self.id = id
+        self.text = text
+        self.user = user
+
+    @abc.abstractmethod
+    def reply(self, text):
+        pass
 
 
-if __name__ == '__main__':
-  main()
+class Handler(object):
+
+    @abc.abstractmethod
+    def handle_message(self, message):
+        pass
+
