@@ -5,27 +5,27 @@
       "contacts" : [
         {
           "name" :  "Klaus KG",
-          "iban" :  "AL47 2121 1009 0000 0002 3569 8741",
+          "iban" :  "AL47212110090000000235698741",
           "bic" :   "OKOYFIHH"
         },
         {
           "name" :  "Valentin AG",
-          "iban" :  "BA39 1290 0794 0102 8494",
+          "iban" :  "BA391290079401028494",
           "bic" :   "AABAFI22"
         },
         {
-          "name" :  "Valentin AG",
-          "iban" :  "BA39 1290 0794 0102 8494",
+          "name" :  "Valentin AG Zweitkonto",
+          "iban" :  "BA391290079401029990",
           "bic" :   "AABAFI22"
         },
         {
           "name" :  "Niklas GmbH",
-          "iban" :  "CY17 0020 0128 0000 0012 0052 7600 ",
+          "iban" :  "CY17002001280000001200527600",
           "bic" :   "PSPBFIHH"
         },
         {
           "name" :  "Thien Inc.",
-          "iban" :  "GE29 NB00 0000 0101 9049 17",
+          "iban" :  "GE29NB0000000101904917",
           "bic" :   "HANDFIHH"
         }
       ]
