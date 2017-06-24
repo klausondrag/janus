@@ -31,6 +31,15 @@ class DAO:
         with open(self._file_name, 'w') as data_file:
             json.dump(to_json(self._data), data_file, indent=2)
 
+    def new_user(self) -> None:
+        for k in self._data.users.keys():
+            if k == self.user_id:
+                return
+
+        print(k)
+        self._data.users[k] = User([], [], 0)
+        self._save_data()
+
     def load_contacts(self) -> List[Contact]:
         return self._data.users[self.user_id].contacts
 

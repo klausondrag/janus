@@ -41,10 +41,10 @@ class PrepareTransaction(object):
         spendings = [t for t in dao.load_transactions() if t.amount < 0][-10:]
 
         # Check balace
-        #balance = dao.get_balance()
-        #if balance < self.amount:
-        #    raise self.Error('balance', "You're balance is {}{}, you can not send {}{}"
-        #        .format(balance, self.currency, self.amount, self.currency))
+        balance = 1000 #dao.get_balance()
+        if balance < self.amount:
+            raise self.Error('balance', "You're balance is {}{}, you can not send {}{}"
+                .format(balance, self.currency, self.amount, self.currency))
 
         # Check if one of the last 3 transactions have the same recipient
         # and amount.
