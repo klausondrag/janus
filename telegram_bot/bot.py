@@ -19,22 +19,22 @@
 # THE SOFTWARE.
 
 import json
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, MessageHandler, Filters
 
 with open('config.json') as fp:
   config = json.load(fp)
 
-def start(bot, update):
-    update.message.reply_text('Hello World!')
 
-def hello(bot, update):
-    update.message.reply_text(
-        'Hello {}'.format(update.message.from_user.first_name))
+def reply(bot, update):
+  update.message.reply_text(update.message.text)
 
-updater = Updater(config['token'])
 
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('hello', hello))
+def main():
+  updater = Updater(config['token'])
+  updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
+  updater.start_polling()
+  updater.idle()
 
-updater.start_polling()
-updater.idle()
+
+if __name__ == '__main__':
+  main()
