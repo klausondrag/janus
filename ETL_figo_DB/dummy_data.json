@@ -1,7 +1,7 @@
 {
   "users" : [
     {
-      "id" : 1,
+      "id" : "1",
       "contacts" : [
         {
           "name" :  "Klaus KG",
@@ -27,11 +27,11 @@
           "name" :  "Thien Inc.",
           "iban" :  "GE29 NB00 0000 0101 9049 17",
           "bic" :   "HANDFIHH"
-        },
+        }
       ]
     },
     {
-      "id" : 2,
+      "id" : "2",
       "contacts" : []
     }
   ]
