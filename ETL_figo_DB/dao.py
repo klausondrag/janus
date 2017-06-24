@@ -56,6 +56,6 @@ class DAO:
 
 
 if __name__ == '__main__':
-    d = DAO('1')
+    d = DAO('A1.1')
     d._save_data()
     print(d.load_contacts())
