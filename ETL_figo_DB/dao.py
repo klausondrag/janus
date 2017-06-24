@@ -3,27 +3,26 @@
 import json
 from typing import List
 from contact import Contact
+from transaction import Transaction
 
-class ETL_DAO:
+class DAO:
     id = ""
 
     def __init__(self, id: str) -> None:
         self.id = id
 
-# Private methods
+
+    ### Private methods ###
+
     def json_to_Contact(self, jdata) -> Contact:
         return Contact(jdata["name"], jdata["iban"], jdata["bic"])
 
-# Interface
 
-    def load_contact(self, iban: str, bic: str, id: str):
-        contacts = self.load_contacts()
-        for c in contacts:
-            if c.iban == iban and c.bic == bic:
-                return c
+    def write_contacts(self, contacts: List[Contact]) -> None:
+        pass
 
-        return Contact("", "", "")
 
+    ### Interface methods ###
 
     def load_contacts(self) -> List[Contact]:
         with open("dummy_data.json", "r") as data_file:
@@ -39,6 +38,34 @@ class ETL_DAO:
                 contacts.append(self.json_to_Contact(c))
 
             return contacts
+
+
+    def save_contact(self, contact: Contact) -> None:
+        contacts = load_contacts()
+        for c in contacts:
+            if (c.iban == contact.iban and c.bic == contact.bic):
+                c.name = contact.name
+        
+        for c in contacts:
+            print(c.name)
+
+
+    def save_contacts(self, contacts: List[Contact]) -> None:
+        for c in contacts:
+            self.save_contact(c)
+
+
+    def delete_contact(self, contact: Contact) -> bool:
+        pass
+
+
+    def load_transactions(self) -> List[Transaction]:
+        pass
+
+
+
+# Interface
+        
 
 
     def save_contact(self, contact: Contact):
