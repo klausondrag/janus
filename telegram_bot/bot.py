@@ -26,41 +26,41 @@ from telegram.ext import Updater, MessageHandler, Filters
 from wit import Wit
 
 with open('config.json') as fp:
-  config = json.load(fp)
+    config = json.load(fp)
 
 wit = Wit(access_token=config['wit_token'])
 
 
 def handler(func):
-  """
-  Decorator for handlers that catches errors.
-  """
+    """
+    Decorator for handlers that catches errors.
+    """
 
-  def wrapper(bot, update):
-    try:
-      return func(bot, update)
-    except:
-      exc_string = traceback.format_exc()
-      print(exc_string, file=sys.stderr)
-      if config.get('debug'):
-        update.message.reply_text(exc_string)
-      else:
-        update.message.reply_text('Internal Error')
+    def wrapper(bot, update):
+        try:
+            return func(bot, update)
+        except:
+            exc_string = traceback.format_exc()
+            print(exc_string, file=sys.stderr)
+            if config.get('debug'):
+                update.message.reply_text(exc_string)
+            else:
+                update.message.reply_text('Internal Error')
 
-  return wrapper
+    return wrapper
 
 
 @handler
 def reply(bot, update):
-  update.message.reply_text(update.message.text)
+    update.message.reply_text(update.message.text)
 
 
 def main():
-  updater = Updater(config['telegram_token'])
-  updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
-  updater.start_polling()
-  updater.idle()
+    updater = Updater(config['telegram_token'])
+    updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
+    updater.start_polling()
+    updater.idle()
 
 
 if __name__ == '__main__':
-  main()
+    main()
