@@ -2,18 +2,7 @@
 
 import json
 from typing import List
-import Contact
-
-class Contact:
-    name = ''
-    iban = ''
-    bic = ''
-
-    def __init__(self, name: str, iban: str, bic: str) -> None:
-        super().__init__()
-        self.name = name
-        self.iban = iban
-        self.bic = bic
+from contact import Contact
 
 class ETL_DAO:
     id = ""
@@ -28,7 +17,13 @@ class ETL_DAO:
 # Interface
 
     def load_contact(self, iban: str, bic: str, id: str):
-        pass
+        contacts = self.load_contacts()
+        for c in contacts:
+            if c.iban == iban and c.bic == bic:
+                return c
+
+        return Contact("", "", "")
+
 
     def load_contacts(self) -> List[Contact]:
         with open("dummy_data.json", "r") as data_file:
@@ -45,15 +40,11 @@ class ETL_DAO:
 
             return contacts
 
-    def save_contact(self, iban: str, bic: str):
-        pass
+
+    def save_contact(self, contact: Contact):
+        self.load_contacts()
+
 
     def save_contacts(self, contacts: List[Contact]):
-        pass
-
-def main():
-        print("a")
-        a = ETL_DAO("1")
-        a.load_contacts()
-
-main()
+        for c in contacts:
+            self.save_contact(c)
