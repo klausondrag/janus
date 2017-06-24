@@ -14,3 +14,7 @@ def search_contacts(user_id: str, name: str) -> List[BEContact]:
 
 def send_money(contact: MWContact, money_amount: int, currency: str) -> bool:
     return FigoConnector.send_money(t.MWContact_to_BEContact(contact), money_amount, currency)
+
+
+def update_figo(add_demo_data: bool) -> None:
+    FigoConnector.update(add_demo_data)

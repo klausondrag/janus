@@ -18,9 +18,10 @@ class User:
         self.id = id
 
     def get_contacts(self):
-        if self.id == 1:
+        if self.id == 'U5ZRDUQGP':
             return [Contact('Niklas', 'DE21 0000', ''),
-                    Contact('Klaus', 'DE22 0000', '')]
+                    Contact('Valentin Zieglmeier', 'AT11 0000', ''),
+                    Contact('Valentin Schluckmeier', 'DE22 0000', '')]
         else:
             return [Contact('Niklas', 'DE21 0000', ''),
                     Contact('Thien', 'DE23 0000', '')]
@@ -29,4 +30,4 @@ class User:
 class FigoConnector:
     @staticmethod
     def send_money(contact: Contact, money_amount: int, currency: str) -> bool:
-        pass
+        return True
