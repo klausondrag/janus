@@ -15,8 +15,14 @@ class ETL:
         pass
 
 
-    ### Private methods ###
-    def get_formatted_transactions() -> List[Transaction]:
-        # 1. get_accounts
-        # 2. get_transactions
-        pass
+        ### Private methods ###
+    def get_formatted_transactions(): #-> Dict[str, List[Transaction]]:
+            # 1. get_accounts
+
+            # 2. get_transactions
+        accounts = figoConnector.get_account()
+        acc_dict = {}
+        for acc in accounts:
+            acc_dict.update({acc.account_id: figoConnector.get_transactions(acc)})
+
+        return acc_dict
