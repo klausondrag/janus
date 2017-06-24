@@ -1,0 +1,38 @@
+{
+  "users" : [
+    {
+      "id" : "1",
+      "contacts" : [
+        {
+          "name" :  "Klaus KG",
+          "iban" :  "AL47 2121 1009 0000 0002 3569 8741",
+          "bic" :   "OKOYFIHH"
+        },
+        {
+          "name" :  "Valentin AG",
+          "iban" :  "BA39 1290 0794 0102 8494",
+          "bic" :   "AABAFI22"
+        },
+        {
+          "name" :  "Valentin AG",
+          "iban" :  "BA39 1290 0794 0102 8494",
+          "bic" :   "AABAFI22"
+        },
+        {
+          "name" :  "Niklas GmbH",
+          "iban" :  "CY17 0020 0128 0000 0012 0052 7600 ",
+          "bic" :   "PSPBFIHH"
+        },
+        {
+          "name" :  "Thien Inc.",
+          "iban" :  "GE29 NB00 0000 0101 9049 17",
+          "bic" :   "HANDFIHH"
+        }
+      ]
+    },
+    {
+      "id" : "2",
+      "contacts" : []
+    }
+  ]
+}
