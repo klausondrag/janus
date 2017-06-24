@@ -1,4 +1,5 @@
 
 # Deployment
 
-1. Insert Telegram Bot Token into `config.json`
+1. Rename `example-config.json` to `config.json`.
+2. Insert a valid Telegram Bot Token
