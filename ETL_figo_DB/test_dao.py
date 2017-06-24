@@ -1,5 +1,5 @@
-from contact import Contact
-from dao import DAO
+from .contact import Contact
+from .dao import DAO
 
 
 def main():
