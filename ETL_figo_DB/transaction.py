@@ -5,8 +5,15 @@ from .util import to_json
 
 
 class Transaction:
-    def __init__(self, id: str, contact: Dict[str, str], type: str,
+    def __init__(self, id: str, contact, type: str,
                  purpose: str, booking_text: str, amount: float) -> None:
+        if isinstance(contact, Dict):
+            self.contact = Contact(**contact)
+        elif isinstance(contact, Contact):
+            self.contact = contact
+        else:
+            raise Exception('invalid type')
+
         self.id = id
         self.contact = Contact(**contact)
         self.type = type
