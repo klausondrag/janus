@@ -23,7 +23,6 @@ import logging
 import json
 import os
 
-from . import state
 from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
@@ -33,9 +32,13 @@ from middleware.api import search_contacts
 
 class State(object):
 
-    def __init__(self, name, data=None):
+    def __init__(self, name):
         self.name = name
-        self.data = data
+        self.data = {}
+
+    def call(self, obj, *args, **kwargs):
+        handler = getattr(obj, 'state_' + self.name)
+        handler(self, *args, **kwargs)
 
 
 class Handler(backends.Handler):
@@ -48,14 +51,19 @@ class Handler(backends.Handler):
         # FIXME: Some proper logging
         print('Handling message from:', message.user)
 
-        state = self.states.setdefault(message.user.id, State('idle', None))
+        state = self.states.setdefault(message.user.id, State('idle'))
         if message.text.lower().strip() in ('restart', 'abort'):
             state.name = 'idle'
+            state.data = {}
             message.reply("Alright, let's start over!")
             return
 
-        handler = getattr(self, 'state_' + state.name)
-        handler(state, message)
+        state.call(self, message)
+
+    def print_receiver_details(self, message, contact):
+        message.reply('--- {}'.format(contact.name))
+        message.reply('IBAN: {}'.format(contact.iban))
+        message.reply('BIC: {}'.format(contact.bic))
 
     def state_idle(self, state, message):
         response = self.wit.message(message.text)
@@ -76,45 +84,71 @@ class Handler(backends.Handler):
             message.reply("Sorry, currently we only handle EUR transactions.")
             return
 
-        send_data = {'contact': None, 'amount': amount, 'currency': currency}
-        print('Contact:', contact)
-        print('Send Data:', send_data)
+        state.data['amount'] = amount
+        state.data['currency'] = currency
+        state.data['contact'] = None
 
         contact_list = search_contacts(message.user.id, contact)
         if not contact_list:
             message.reply("Dude, you don't have a friend with the name {}!".format(contact))
             message.reply("Enter the damn IBAN manually, jeez ...")
             state.name = 'get_iban'
-            state.data = {'follow_up': 'send_money', 'data': send_data}
+            state.data['next'].update({
+                'next': 'ask_create_contact',
+                'intent': 'send_money'
+            })
             return
 
         if len(contact_list) > 1:
-            message.reply("Aha, Mr. rich bitch has many friends it seems.")
             message.reply("Who will be the lucky one? Type the number")
             for i, contact in enumerate(contact_list, 1):
                 message.reply('{}) {}'.format(i, contact.name))
             state.name = 'get_contact_from_index'
-            state.data = {'follow_up': 'send_money', 'data': send_data}
+            state.data.update({
+                'next': 'send_money',
+                'contact_list': contact_list
+            })
             return
 
         contact = contact_list[0]
         message.reply('Is this the lucky person to recieve your blessing?')
-        message.reply('--- {}'.format(contact.name))
-        message.reply('IBAN: {}'.format(contact.iban))
-        message.reply('BIC: {}'.format(contact.bic))
+        self.print_receiver_details(message, contact)
 
-        send_data['contact'] = contact
         state.name = 'confirm'
-        state.data = {'follow_up': 'send_money', 'data': send_data}
+        state.data['contact'] = contact
+        state.data['next'] = 'send_money'
 
     def state_get_iban(self, state, message):
         message.reply('TODO: parse IBAN data')
 
     def state_get_contact_from_index(self, state, message):
-        message.reply('TODO: get contact from contact list')
+        try:
+            index = int(message.text.strip()) - 1
+        except ValueError:
+            message.reply('Not a number.')
+            return
+        if index < 0 or index >= len(state.data['contact_list']):
+            message.reply('Not one of the available choices.')
+            return
+        state.data['contact'] = state.data['contact_list'][index]
+        message.reply("Ok, we'll send {}{} to".format(state.data['amount'], state.data['currency']))
+        self.print_receiver_details(message, state.data['contact'])
+        message.reply('Is that right?')
+        state.name = state.data['next']
+
+    def state_confirm(self, state, message):
+        reply = message.text.strip().lower()
+        if reply in ('y', 'yes', 'true', 'valid', 'ok'):
+            state.name = state.data['next']
+        elif reply in ('n', 'no', 'false', 'invalid', 'wrong'):
+            state.name = 'idle'
+            state.data = {}
+        else:
+            message.reply("I couldn't understand you.")
+        state.call(self, message)
 
     def state_send_money(self, state, message):
-        message.reply('TODO: send money to', state.data)
+        message.reply('TODO: send money to {}'.format(state.data))
 
 
 @click.command()

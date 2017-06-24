@@ -130,6 +130,7 @@ class SlackBackend(object):
         while True:
             for data in self.client.rtm_read():
                 if data['type'] != 'message': continue
+                if 'text' not in data: continue
 
                 # Slack sends the last message again. We don't want to process
                 # it, though. This is a very dirty way that skips all messages
