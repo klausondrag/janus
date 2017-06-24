@@ -28,7 +28,32 @@
           "bic" :   "HANDFIHH"
         }
       ],
-      "transactions" : []
+      "transactions" : [
+        {
+          "id" : "1",
+          "contact" : {
+            "name" :"Thien Inc.",
+            "iban" :"GE29NB0000000101904917",
+            "bic" :"HANDFIHH"
+          },
+          "type" : "Standing order",
+          "purpose" : "Buchung 23",
+          "booking_text" : "Buchung 23 an Zulieferer Thien Inc.",
+          "amount" : "-1322.29"
+        },
+        {
+          "id" : "2",
+          "contact" : {
+            "name" :"Thien Inc.",
+            "iban" :"GE29NB0000000101904917",
+            "bic" :"HANDFIHH"
+          },
+          "type" : "Remittance",
+          "purpose" : "Einzahlung",
+          "booking_text" : "Einzahlung von Thien Inc.",
+          "amount" : "900.99"
+        }
+      ]
     }
   }
 }
