@@ -52,7 +52,7 @@ class PrepareTransaction(object):
             transactions = spendings[-5:]
             for t in transactions:
                 if abs(int(t.amount)) == int(self.amount) and t.contact.iban == self.receiver.iban:
-                    raise self.Error('similar', "You recently transfered {:.2f}{} to {}, are you"
+                    raise self.Error('similar', "You recently transfered {:.2f}{} to {}, are you "
                         "sure you want to do it again?"
                         .format(self.amount, self.currency, self.receiver.name))
 
