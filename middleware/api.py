@@ -41,7 +41,7 @@ class PrepareTransaction(object):
         spendings = [t for t in dao.load_transactions() if t.amount < 0][-10:]
 
         # Check balace
-        balance = 1000 #dao.get_balance()
+        balance = 10000 #dao.get_balance()
         if balance < self.amount:
             raise self.Error('balance', "You're balance is {}{}, you can not send {}{}"
                 .format(balance, self.currency, self.amount, self.currency))
@@ -49,12 +49,12 @@ class PrepareTransaction(object):
         # Check if one of the last 3 transactions have the same recipient
         # and amount.
         if check_similar:
-            transactions = spendings[-3:]
+            transactions = spendings[-5:]
             for t in transactions:
-                if t.amount == self.amount and t.contact.iban == self.contact.iban:
+                if abs(int(t.amount)) == int(self.amount) and t.contact.iban == self.receiver.iban:
                     raise self.Error('similar', "You recently transfered {:.2f}{} to {}, are you"
                         "sure you want to do it again?"
-                        .format(self.amount, self.currency, self.contact.name))
+                        .format(self.amount, self.currency, self.receiver.name))
 
         # Check if our average spendings are increasing.
         if spendings and check_excess:
