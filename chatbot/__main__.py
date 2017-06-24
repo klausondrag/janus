@@ -27,7 +27,7 @@ from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
 from wit import Wit
-from middleware.api import search_contacts
+from middleware.api import search_contacts, send_money
 
 
 class State(object):
@@ -148,7 +148,16 @@ class Handler(backends.Handler):
         state.call(self, message)
 
     def state_send_money(self, state, message):
-        message.reply('TODO: send money to {}'.format(state.data))
+        result = send_money(state.data['contact'],
+            state.data['amount'], state.data['currency'])
+        if result:
+            message.reply("Bam! You sent {}{} to {}".format(
+                state.data['amount'], state.data['currency'],
+                state.data['contact'].name))
+        else:
+            message.reply("Hm, something went wrong :(")
+        state.name = 'idle'
+        state.data = {}
 
 
 @click.command()
