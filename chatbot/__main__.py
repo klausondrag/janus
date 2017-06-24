@@ -71,8 +71,15 @@ class Handler(backends.Handler):
             message.reply("Sorry, I didn't understand you.")
             return
 
+        # Check if the intent is determined with some minimum confidence.
+        if response['entities']['intent'][0]['confidence'] < 0.8:
+            message.reply("Sorry, I didn't understand you.")
+            return
+
         intent = response['entities']['intent'][0]['value']
-        if intent != 'send_money':
+        if valid and intent != 'send_money':
+            valid = False
+        if not valid:
             # FIXME: Currently we only handle the send_money intent.
             message.reply("This intent is currently not supported ({})".format(intent))
             return
@@ -172,15 +179,16 @@ def main(backend):
 
     if backend == 'telegram':
         backend = TelegramBackend(
-            config['telegram']['token'],
-            handler,
-            config['debug'])
+            token = config['telegram']['token'],
+            handler = handler,
+            debug = config['debug'])
     elif backend == 'slack':
         backend = SlackBackend(
-            config['slack']['botname'],
-            config['slack']['token'],
-            handler,
-            config['debug'])
+            botname = config['slack']['botname'],
+            token = config['slack']['token'],
+            handler = handler,
+            mode = 'im',
+            debug = config['debug'])
     else: assert False
     backend.start()
 

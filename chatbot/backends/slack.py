@@ -49,8 +49,10 @@ class SlackBackend(object):
     Reacts on messages pointing to the bot user.
     """
 
-    def __init__(self, botname, token, handler, debug=False, read_delay=1):
+    def __init__(self, botname, token, handler, mode='im', debug=False, read_delay=1):
+        assert mode in ('im', 'mention')
         self.botname = botname
+        self.mode = mode
         self.token = token
         self.client = slackclient.SlackClient(token)
         self.handler = handler
@@ -131,16 +133,23 @@ class SlackBackend(object):
             for data in self.client.rtm_read():
                 if data['type'] != 'message': continue
                 if 'text' not in data: continue
+                if 'subtype' in data: continue  # TODO: Anything to handle here?
 
                 # Slack sends the last message again. We don't want to process
                 # it, though. This is a very dirty way that skips all messages
-                # received in the first second on startup. ¯\_(ツ)_/¯
-                if (time.time() - tbegin) < 1.0:
+                # received in the first 0.5 seconds on startup. ¯\_(ツ)_/¯
+                if (time.time() - tbegin) < 0.5:
                     print('Skipping initial message')
                     continue
 
-                if data['text'].startswith('<@{}>'.format(self.botid)):
+                handle = False
+                if self.mode == 'im' and data['channel'] == self.botim['id']:
+                    print(data)
+                    handle = True
+                    text = data['text']
+                elif self.mode == 'mention' and data['text'].startswith('<@{}>'.format(self.botid)):
                     text = data['text'][len(self.botid) + 3:]
+                if handle:
                     message = SlackMessage(self, data, text)
                     try:
                         self.handler.handle_message(message)
