@@ -29,7 +29,7 @@ from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
 from wit import Wit
-from middleware.api import Contact, search_contacts, send_money, update_figo
+from middleware.api import Contact, PrepareTransaction, search_contacts, update_figo
 
 
 class State(object):
@@ -177,7 +177,7 @@ class Handler(backends.Handler):
         message.reply("Ok, we'll send {}{} to".format(state.data['amount'], state.data['currency']))
         self.print_receiver_details(message, state.data['contact'])
         message.reply('Is that right?')
-        state.next()
+        state.name = 'confirm'
 
     def state_confirm(self, state, message):
         reply = message.text.strip().lower()
@@ -186,19 +186,52 @@ class Handler(backends.Handler):
             state.call(self, message)
         elif reply in ('n', 'no', 'false', 'invalid', 'wrong'):
             state.name = 'idle'
+            state.data = {}
             message.reply("Ok, back to the beginning.")
         else:
             message.reply("I couldn't understand you.")
 
     def state_send_money(self, state, message):
-        result = send_money(state.data['contact'],
+        if state.data.get('previous_check'):
+            # User must have confirmed to continue, so we skip the
+            # check this time.
+            print("Disableing check", state.data['previous_check'])
+            state.data[state.data['previous_check']] = False
+            del state.data['previous_check']
+
+        trans = PrepareTransaction(message.user.id, state.data['contact'],
             state.data['amount'], state.data['currency'])
+        try:
+            print(state.data)
+            trans.check(
+                check_similar=state.data.get('check:similar', True),
+                check_excess=state.data.get('check:excess', True)
+            )
+        except trans.Error as exc:
+            message.reply(exc.message)
+            if exc.type == 'similar':
+                state.data['previous_check'] = 'check:similar'
+                state.name = 'confirm'
+                state.next('send_money')
+            elif exc.type == 'excess':
+                state.data['previous_check'] = 'check:excess'
+                state.name = 'confirm'
+                state.next('send_money')
+            elif exc.type == 'balance':
+                state.name = 'idle'
+                state.data = {}
+            else:
+                raise RuntimeError('unhandled transaction error', exc)
+            return
+
+        result = trans.send()
         if result:
             message.reply("Bam! You sent {}{} to {}".format(
                 state.data['amount'], state.data['currency'],
                 state.data['contact'].name))
         else:
             message.reply("Hm, something went wrong :(")
+
         state.name = 'idle'
         state.data = {}
 
