@@ -20,6 +20,7 @@
 
 import json
 import functools
+import logging
 import traceback
 import sys
 from telegram.ext import Updater, MessageHandler, Filters
@@ -28,6 +29,7 @@ from wit import Wit
 with open('config.json') as fp:
     config = json.load(fp)
 
+logging.basicConfig(level=logging.INFO)
 wit = Wit(access_token=config['wit_token'])
 
 
@@ -41,17 +43,16 @@ def handler(func):
             return func(bot, update)
         except:
             exc_string = traceback.format_exc()
-            print(exc_string, file=sys.stderr)
             if config.get('debug'):
                 update.message.reply_text(exc_string)
-            else:
-                update.message.reply_text('Internal Error')
+            raise
 
     return wrapper
 
 
 @handler
 def reply(bot, update):
+    logging.info('Received message from %s', update.message.from_user['username'])
     update.message.reply_text(update.message.text)
 
 
