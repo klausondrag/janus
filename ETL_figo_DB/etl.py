@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 from typing import List
+from . import figoConnector
+from .contact import Contact
+from .transaction import Transaction
 
 class ETL:
     def update(add_demo_data: bool) -> None:
