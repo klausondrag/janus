@@ -26,3 +26,13 @@ def get_transactions(account):
         x = Transaction(trans.transaction_id, c, trans.type, trans.purpose, trans.booking_text, trans.amount)
         transact_list.append(x)
     return transact_list
+
+
+def get_balance(userID: str):
+    for acc in session.accounts:
+        if userID == acc.account_id:
+            return acc.balance.balance
+
+
+def sendMoney():
+    pass
