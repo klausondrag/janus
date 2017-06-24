@@ -3,6 +3,6 @@ chardet==3.0.4
 future==0.16.0
 idna==2.5
 python-telegram-bot==6.1.0
-PyWit==0.4.0
 requests==2.18.1
 urllib3==1.21.1
+wit==4.2.0

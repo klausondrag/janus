@@ -23,9 +23,12 @@ import functools
 import traceback
 import sys
 from telegram.ext import Updater, MessageHandler, Filters
+from wit import Wit
 
 with open('config.json') as fp:
   config = json.load(fp)
+
+wit = Wit(access_token=config['wit_token'])
 
 
 def handler(func):
@@ -49,12 +52,11 @@ def handler(func):
 
 @handler
 def reply(bot, update):
-  foo
   update.message.reply_text(update.message.text)
 
 
 def main():
-  updater = Updater(config['token'])
+  updater = Updater(config['telegram_token'])
   updater.dispatcher.add_handler(MessageHandler(Filters.text, reply))
   updater.start_polling()
   updater.idle()
