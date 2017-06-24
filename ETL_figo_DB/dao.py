@@ -61,17 +61,3 @@ class DAO:
 
     def load_transactions(self) -> List[Transaction]:
         pass
-
-
-
-# Interface
-        
-
-
-    def save_contact(self, contact: Contact):
-        self.load_contacts()
-
-
-    def save_contacts(self, contacts: List[Contact]):
-        for c in contacts:
-            self.save_contact(c)
