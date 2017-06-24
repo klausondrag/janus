@@ -19,13 +19,37 @@
 # THE SOFTWARE.
 
 import json
+import functools
+import traceback
+import sys
 from telegram.ext import Updater, MessageHandler, Filters
 
 with open('config.json') as fp:
   config = json.load(fp)
 
 
+def handler(func):
+  """
+  Decorator for handlers that catches errors.
+  """
+
+  def wrapper(bot, update):
+    try:
+      return func(bot, update)
+    except:
+      exc_string = traceback.format_exc()
+      print(exc_string, file=sys.stderr)
+      if config.get('debug'):
+        update.message.reply_text(exc_string)
+      else:
+        update.message.reply_text('Internal Error')
+
+  return wrapper
+
+
+@handler
 def reply(bot, update):
+  foo
   update.message.reply_text(update.message.text)
 
 
