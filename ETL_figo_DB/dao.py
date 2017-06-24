@@ -1,82 +1,13 @@
 #!/usr/bin/env python
 
 import json
-<<<<<<< HEAD
 from typing import List, Dict, Collection, Mapping
 
-=======
-from typing import List
 from .contact import Contact
+from .data import Data
 from .transaction import Transaction
->>>>>>> 58e20d9a7844a86fa0ca45dd5b9078fee70d863a
-
-class Contact:
-    def __init__(self, name, iban, bic):
-        self.name = name
-        self.iban = iban
-        self.bic = bic
-
-    def to_json(self):
-        return {
-            'name': to_json(self.name),
-            'iban': to_json(self.iban),
-            'bic': to_json(self.bic)
-        }
-
-
-class Transaction:
-    def __init__(self, id, contact, type, purpose, booking_text, amount):
-        self.id = id
-        self.contact = Contact(**contact)
-        self.type = type
-        self.purpose = purpose
-        self.booking_text = booking_text
-        self.amount = amount
-
-    def to_json(self):
-        return {
-            'id': to_json(self.id),
-            'contact': to_json(self.contact),
-            'type': to_json(self.type),
-            'purpose': to_json(self.purpose),
-            'booking_text': to_json(self.booking_text),
-            'amount': to_json(self.amount)
-        }
-
-
-class User:
-    def __init__(self, contacts: List[Contact], transaction: List[Transaction]):
-        self.contacts = contacts
-        self.transactions = transaction
-
-    def to_json(self):
-        return {
-            'contacts': to_json(self.contacts),
-            'transactions': to_json(self.transactions)
-        }
-
-
-class Data:
-    def __init__(self, users: Dict[str, User]):
-        self.users = users
-
-    def to_json(self):
-        return {
-            "users": to_json(self.users)
-        }
-
-
-def to_json(obj):
-    if hasattr(obj, 'to_json'):
-        return obj.to_json()
-    elif isinstance(obj, str):
-        return obj
-    elif isinstance(obj, Mapping):
-        return {to_json(k): to_json(v) for k, v in obj.items()}
-    elif isinstance(obj, Collection):
-        return [to_json(x) for x in obj]
-    else:
-        return obj
+from .user import User
+from .util import to_json
 
 
 class DAO:
