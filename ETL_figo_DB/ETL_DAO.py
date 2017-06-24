@@ -2,7 +2,7 @@
 
 import json
 from typing import List
-from Contact import Contact
+from contact import Contact
 
 class ETL_DAO:
     id = ""
