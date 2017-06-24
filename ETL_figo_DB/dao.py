@@ -2,9 +2,8 @@
 
 import json
 from typing import List
-from contact import Contact
-from transaction import Transaction
-
+from .contact import Contact
+from .transaction import Transaction
 
 class DAO:
     def __init__(self, id: str) -> None:

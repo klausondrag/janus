@@ -1,4 +1,4 @@
-from contact import Contact
+from .contact import Contact
 
 class Transaction:
     def __init__(self, id: str, contact: Contact, type: str, 
