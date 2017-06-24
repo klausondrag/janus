@@ -22,12 +22,14 @@ import click
 import logging
 import json
 import os
+import re
+import string
 
 from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
 from wit import Wit
-from middleware.api import search_contacts, send_money, update_figo
+from middleware.api import Contact, search_contacts, send_money, update_figo
 
 
 class State(object):
@@ -35,6 +37,22 @@ class State(object):
     def __init__(self, name):
         self.name = name
         self.data = {}
+
+    def next(self, value=NotImplemented):
+        if value is NotImplemented:
+            next = self.data.pop('next')
+            print('entering state:', self.name)
+            if isinstance(next, str):
+                self.name = next
+            elif isinstance(next, (list, tuple)):
+                self.name = next[0]
+                next = next[1:]
+                if next:
+                    self.data['next'] = next
+            elif name is not None:
+                raise ValueError('invalid next: {!r}'.format(next))
+        else:
+            self.data['next'] = value
 
     def call(self, obj, *args, **kwargs):
         handler = getattr(obj, 'state_' + self.name)
@@ -52,6 +70,7 @@ class Handler(backends.Handler):
         print('Handling message from:', message.user)
 
         state = self.states.setdefault(message.user.id, State('idle'))
+        print('@', state.name)
         if message.text.lower().strip() in ('restart', 'abort'):
             state.name = 'idle'
             state.data = {}
@@ -90,9 +109,7 @@ class Handler(backends.Handler):
             return
 
         intent = response['entities']['intent'][0]['value']
-        if valid and intent != 'send_money':
-            valid = False
-        if not valid:
+        if intent != 'send_money':
             # FIXME: Currently we only handle the send_money intent.
             message.reply("This intent is currently not supported ({})".format(intent))
             return
@@ -107,15 +124,15 @@ class Handler(backends.Handler):
         state.data['amount'] = amount
         state.data['currency'] = currency
         state.data['contact'] = None
+        state.data['contact_name'] = contact
 
         contact_list = search_contacts(message.user.id, contact)
         if not contact_list:
             message.reply("Dude, you don't have a friend with the name {}!".format(contact))
             message.reply("Enter the damn IBAN manually, jeez ...")
             state.name = 'get_iban'
-            state.data['next'].update({
-                'next': 'ask_create_contact',
-                'intent': 'send_money'
+            state.data.update({
+                'next': 'send_money'
             })
             return
 
@@ -136,10 +153,16 @@ class Handler(backends.Handler):
 
         state.name = 'confirm'
         state.data['contact'] = contact
-        state.data['next'] = 'send_money'
+        state.next('send_money')
 
     def state_get_iban(self, state, message):
-        message.reply('TODO: parse IBAN data')
+        text = re.sub('\s*', '', message.text.strip())
+        if set(text).difference(set(string.ascii_letters + string.digits)):
+            message.reply('IBAN must constist of digits and letters only')
+            return
+        state.next()
+        state.data['contact'] = Contact(state.data['contact_name'], text, '')
+        state.call(self, message)
 
     def state_get_contact_from_index(self, state, message):
         try:
@@ -154,18 +177,18 @@ class Handler(backends.Handler):
         message.reply("Ok, we'll send {}{} to".format(state.data['amount'], state.data['currency']))
         self.print_receiver_details(message, state.data['contact'])
         message.reply('Is that right?')
-        state.name = state.data['next']
+        state.next()
 
     def state_confirm(self, state, message):
         reply = message.text.strip().lower()
         if reply in ('y', 'yes', 'true', 'valid', 'ok'):
-            state.name = state.data['next']
+            state.next()
+            state.call(self, message)
         elif reply in ('n', 'no', 'false', 'invalid', 'wrong'):
             state.name = 'idle'
-            state.data = {}
+            message.reply("Ok, back to the beginning.")
         else:
             message.reply("I couldn't understand you.")
-        state.call(self, message)
 
     def state_send_money(self, state, message):
         result = send_money(state.data['contact'],

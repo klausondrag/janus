@@ -28,7 +28,7 @@ class SlackMessage(Message):
 
     def __init__(self, backend, data, text=None):
         # Convert the user information.
-        user = backend.get_users()[data['user']]
+        user = backend.get_user(data['user'])
         user = User(data['user'], user['name'])
 
         if text is None:
@@ -79,11 +79,18 @@ class SlackBackend(object):
                         output['channel']
         return None, None
 
-    def get_users(self):
-        result = {}
-        for user in self.client.api_call('users.list')['members']:
-            result[user['id']] = user
-        return result
+    def get_users(self, force_update=False):
+        if not hasattr(self, '_users') or force_update:
+            result = {}
+            for user in self.client.api_call('users.list')['members']:
+                result[user['id']] = user
+            self._users = result
+        return self._users
+
+    def get_user(self, id):
+        if id not in getattr(self, '_users', {}):
+            self.get_users(True)
+        return self._users[id]
 
     def get_channels(self):
         result = {}
@@ -125,7 +132,7 @@ class SlackBackend(object):
                 self.botim = im
                 break
         else:
-            raise ValueError('could not determine Bot Channel')
+            raise ValueError('could31 not determine Bot Channel')
 
         tbegin = time.time()
 
