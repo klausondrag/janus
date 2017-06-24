@@ -1,8 +1,8 @@
 from typing import List
 
-from middleware.interface import Contact as MWContact
-from mock import User, Contact as BEContact, FigoConnector
-import transformer as t
+from .interface import Contact as MWContact
+from .mock import User, Contact as BEContact, FigoConnector
+from . import transformer as t
 
 
 def search_contacts(user_id: str, name: str) -> List[BEContact]:

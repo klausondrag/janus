@@ -1,5 +1,5 @@
-from middleware.interface import Contact as MWContact
-from mock import Contact as BEContact
+from .interface import Contact as MWContact
+from .mock import Contact as BEContact
 
 
 def MWContact_to_BEContact(contact: MWContact) -> BEContact:
