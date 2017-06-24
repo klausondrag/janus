@@ -125,7 +125,7 @@ class SlackBackend(object):
                 self.botim = im
                 break
         else:
-            raise ValueError('coudl not determine Bot Channel')
+            raise ValueError('could not determine Bot Channel')
 
         tbegin = time.time()
 

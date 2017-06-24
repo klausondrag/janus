@@ -27,7 +27,7 @@ from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
 from wit import Wit
-from middleware.api import search_contacts, send_money
+from middleware.api import search_contacts, send_money, update_figo
 
 
 class State(object):
@@ -56,6 +56,19 @@ class Handler(backends.Handler):
             state.name = 'idle'
             state.data = {}
             message.reply("Alright, let's start over!")
+            return
+
+        elif message.text.lower().strip().startswith('trollmode'):
+            value = message.text.lower().strip().split()[1:]
+            if len(value) != 1 or value[0] not in ('on', 'off'):
+                message.reply('Invalid value')
+                return
+            troll = value[0] == 'on'
+            update_figo(troll)
+            if troll:
+                message.reply('Trollconfiguration activated.')
+            else:
+                message.reply('Back to normal.')
             return
 
         state.call(self, message)
@@ -173,6 +186,8 @@ def main(backend):
     logging.basicConfig(level=logging.INFO)
     with open('config.json') as fp:
         config = json.load(fp)
+
+    update_figo(False)
 
     wit = Wit(config['wit']['token'])
     handler = Handler(wit)

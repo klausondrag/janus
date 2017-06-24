@@ -32,3 +32,7 @@ class FigoConnector:
     @staticmethod
     def send_money(contact: Contact, money_amount: int, currency: str) -> bool:
         return True
+
+    @staticmethod
+    def update(add_demo_data):
+        pass
