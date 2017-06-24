@@ -23,16 +23,22 @@ import logging
 import json
 import os
 
+from . import state
 from . import backends
 from .backends.telegram import TelegramBackend
 from .backends.slack import SlackBackend
+from wit import Wit
 
 
 class Handler(backends.Handler):
 
+    def __init__(self, wit):
+        self.wit = wit
+
     def handle_message(self, message):
         print('Handling message from:', message.user)
-        message.reply('Hello!')
+        response = self.wit.message(message.text)
+        message.reply('```\n' + json.dumps(response, indent=2) + '\n```')
 
 
 @click.command()
@@ -42,16 +48,19 @@ def main(backend):
     with open('config.json') as fp:
         config = json.load(fp)
 
+    wit = Wit(config['wit']['token'])
+    handler = Handler(wit)
+
     if backend == 'telegram':
         backend = TelegramBackend(
             config['telegram']['token'],
-            Handler(),
+            handler,
             config['debug'])
     elif backend == 'slack':
         backend = SlackBackend(
             config['slack']['botname'],
             config['slack']['token'],
-            Handler(),
+            handler,
             config['debug'])
     else: assert False
     backend.start()

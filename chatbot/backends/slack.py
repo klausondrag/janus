@@ -26,14 +26,17 @@ from . import User, Message
 
 class SlackMessage(Message):
 
-    def __init__(self, backend, data):
+    def __init__(self, backend, data, text=None):
         # Convert the user information.
         user = backend.get_users()[data['user']]
         user = User(data['user'], user['name'])
 
+        if text is None:
+            text = data['text']
+
         # Generate a unique message ID.
         message_id = data['channel'] + data['user'] + data['ts']
-        Message.__init__(self, message_id, data['text'], user)
+        Message.__init__(self, message_id, text, user)
         self.channel = data['channel']
         self.backend = backend
 
@@ -134,7 +137,8 @@ class SlackBackend(object):
                     continue
 
                 if data['text'].startswith('<@{}>'.format(self.botid)):
-                    message = SlackMessage(self, data)
+                    text = data['text'][len(self.botid) + 3:]
+                    message = SlackMessage(self, data, text)
                     try:
                         self.handler.handle_message(message)
                     except:

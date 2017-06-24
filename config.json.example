@@ -9,5 +9,10 @@
   "wit": {
     "token": "INSERT TOKEN HERE"
   },
+  "figo": {
+    "token": "INSERT TOKEN HERE",
+    "client_id": "INSERT CLIENT ID HERE",
+    "secret": "INSERT SECRET HERE"
+  }
   "debug": false
 }
