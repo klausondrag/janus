@@ -1,8 +1,14 @@
 #!/usr/bin/env python
 
 import json
+<<<<<<< HEAD
 from typing import List, Dict, Collection, Mapping
 
+=======
+from typing import List
+from .contact import Contact
+from .transaction import Transaction
+>>>>>>> 58e20d9a7844a86fa0ca45dd5b9078fee70d863a
 
 class Contact:
     def __init__(self, name, iban, bic):
@@ -130,6 +136,9 @@ class DAO:
         pass
 
     def load_transactions(self) -> List[Transaction]:
+        pass
+
+    def save_transactions(self, transactions: List[Transaction]):
         pass
 
     ### Private methods ###
