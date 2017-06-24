@@ -1,38 +1,59 @@
 {
-  "users" : [
-    {
-      "id" : "1",
-      "contacts" : [
+  "users": {
+    "1": {
+      "contacts": [
         {
-          "name" :  "Klaus KG",
-          "iban" :  "AL47212110090000000235698741",
-          "bic" :   "OKOYFIHH"
+          "name": "Klaus KG",
+          "iban": "AL47212110090000000235698741",
+          "bic": "OKOYFIHH"
         },
         {
-          "name" :  "Valentin AG",
-          "iban" :  "BA391290079401028494",
-          "bic" :   "AABAFI22"
+          "name": "Valentin AG",
+          "iban": "BA391290079401028494",
+          "bic": "AABAFI22"
         },
         {
-          "name" :  "Valentin AG Zweitkonto",
-          "iban" :  "BA391290079401029990",
-          "bic" :   "AABAFI22"
+          "name": "Valentin AG Zweitkonto",
+          "iban": "BA391290079401029990",
+          "bic": "AABAFI22"
         },
         {
-          "name" :  "Niklas GmbH",
-          "iban" :  "CY17002001280000001200527600",
-          "bic" :   "PSPBFIHH"
+          "name": "Niklas GmbH",
+          "iban": "CY17002001280000001200527600",
+          "bic": "PSPBFIHH"
         },
         {
-          "name" :  "Thien Inc.",
-          "iban" :  "GE29NB0000000101904917",
-          "bic" :   "HANDFIHH"
+          "name": "Thien Inc.",
+          "iban": "GE29NB0000000101904917",
+          "bic": "HANDFIHH"
+        }
+      ],
+      "transactions": [
+        {
+          "id": "1",
+          "contact": {
+            "name": "Thien Inc.",
+            "iban": "GE29NB0000000101904917",
+            "bic": "HANDFIHH"
+          },
+          "type": "Standing order",
+          "purpose": "Buchung 23",
+          "booking_text": "Buchung 23 an Zulieferer Thien Inc.",
+          "amount": "-1322.29"
+        },
+        {
+          "id": "2",
+          "contact": {
+            "name": "Thien Inc.",
+            "iban": "GE29NB0000000101904917",
+            "bic": "HANDFIHH"
+          },
+          "type": "Remittance",
+          "purpose": "Einzahlung",
+          "booking_text": "Einzahlung von Thien Inc.",
+          "amount": "900.99"
         }
       ]
-    },
-    {
-      "id" : "2",
-      "contacts" : []
     }
-  ]
+  }
 }
