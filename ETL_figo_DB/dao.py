@@ -12,7 +12,7 @@ from .util import to_json
 
 class DAO:
     def __init__(self, user_id: str) -> None:
-        self._file_name = 'dummy_data.json'
+        self._file_name = "data/dummy_data.json"
         self.user_id = user_id
         self._data = self._load_data()
 
