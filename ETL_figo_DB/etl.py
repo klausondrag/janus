@@ -7,6 +7,7 @@ from .transaction import Transaction
 from .dao import DAO
 
 class ETL:
+
     def update(add_demo_data: bool) -> None:
         transactions_kvps = ETL.get_formatted_transactions()
         # 3. Transform data
@@ -33,10 +34,10 @@ class ETL:
                 t = Transaction("230", c, "Remittance", "Illegale Ueberweisung", "Ueberweisung", "-100000.10")
                 transactions.append(t)
 
-            try:
-                dao.save_transactions(transactions)
-            except KeyError:
-                continue
+            dao.save_transactions(transactions)
+
+            bal = figoConnector.get_balance(dao.user_id)
+            dao.save_balance(bal)
 
         # 4. Save contacts, transactions and meta (last access)
         pass

@@ -21,9 +21,10 @@ class DAO:
             json_text = json.loads(data_file.read())
             users = {}
             for k, v in json_text['users'].items():
+                balance = v.get('balance')
                 contacts = [Contact(**c) for c in v['contacts']]
                 transactions = [Transaction(**t) for t in v['transactions']]
-                users[k] = User(contacts, transactions)
+                users[k] = User(contacts, transactions, balance)
             return Data(users)
 
     def _save_data(self) -> None:
@@ -54,6 +55,9 @@ class DAO:
         self._data.users[self.user_id].transactions = transactions
         self._save_data()
 
+    def save_balance(self, balance: float):
+        self._data.users[self.user_id].balance = balance
+        self._save_data()
 
 if __name__ == '__main__':
     d = DAO('A1.1')

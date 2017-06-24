@@ -6,9 +6,10 @@ from .util import to_json
 
 
 class User:
-    def __init__(self, contacts: List[Contact], transaction: List[Transaction]):
+    def __init__(self, contacts: List[Contact], transaction: List[Transaction], balance: float):
         self.contacts = contacts
         self.transactions = transaction
+        self.balance = balance
 
     def to_json(self):
         return {
