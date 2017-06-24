@@ -55,6 +55,7 @@ class SlackBackend(object):
         self.client = slackclient.SlackClient(token)
         self.handler = handler
         self.read_delay = read_delay
+        self.debug = debug
         self.botid = None
         self.botim = None
 
@@ -134,6 +135,7 @@ class SlackBackend(object):
                 # it, though. This is a very dirty way that skips all messages
                 # received in the first second on startup. ¯\_(ツ)_/¯
                 if (time.time() - tbegin) < 1.0:
+                    print('Skipping initial message')
                     continue
 
                 if data['text'].startswith('<@{}>'.format(self.botid)):
@@ -143,3 +145,5 @@ class SlackBackend(object):
                         self.handler.handle_message(message)
                     except:
                         traceback.print_exc()
+                        if self.debug:
+                            message.reply('```\n' + traceback.format_exc() + '\n```')

@@ -24,7 +24,8 @@ class User:
                     Contact('Valentin Schluckmeier', 'DE22 0000', '')]
         else:
             return [Contact('Niklas', 'DE21 0000', ''),
-                    Contact('Thien', 'DE23 0000', '')]
+                    Contact('Thien Nguyen', 'DE23 0000', ''),
+                    Contact('Li Nguyen', 'DE24 9942', '')]
 
 
 class FigoConnector:
