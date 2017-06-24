@@ -32,9 +32,17 @@ class DAO:
             if (c.iban == contact.iban and c.bic == contact.bic):
                 c.name = contact.name
         
-        with open("dummy_data.json", "w") as data_file:
+        data = None
+        file = "dummy_data.json"
+        with open(file, "r") as data_file:
             data = json.loads(data_file.read())
-            print(data["users"]["1"])
+            contacts = map(lambda x: x.__dict__, contacts)
+            data["users"][self.id]["contacts"] = contacts
+        
+        print(contacts[0])
+        
+        with open("test.json", "w") as out_file:
+            json.dump(data, out_file)
 
 
     def save_contacts(self, contacts: List[Contact]) -> None:
