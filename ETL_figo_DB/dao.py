@@ -17,11 +17,7 @@ class DAO:
     def load_contacts(self) -> List[Contact]:
         with open("dummy_data.json", "r") as data_file:
             data = json.loads(data_file.read())
-            users = data["users"]
-            contacts_json = []
-            for u in users:
-                if u["id"] == self.id:
-                    contacts_json = u["contacts"]
+            contacts_json = data["users"][self.id]["contacts"]
 
             contacts = []
             for c in contacts_json:
@@ -36,8 +32,9 @@ class DAO:
             if (c.iban == contact.iban and c.bic == contact.bic):
                 c.name = contact.name
         
-        for c in contacts:
-            print(c.name)
+        with open("dummy_data.json", "w") as data_file:
+            data = json.loads(data_file.read())
+            print(data["users"]["1"])
 
 
     def save_contacts(self, contacts: List[Contact]) -> None:
