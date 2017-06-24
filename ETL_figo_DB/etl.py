@@ -44,7 +44,7 @@ class ETL:
             # 1. get_accounts
 
             # 2. get_transactions
-        accounts = figoConnector.get_account()
+        accounts = figoConnector.get_accounts()
         acc_dict = {}
         for acc in accounts:
             acc_dict.update({acc.account_id: figoConnector.get_transactions(acc)})

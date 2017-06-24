@@ -6,7 +6,7 @@ from pprint import pprint
 #connection = FigoConnection("<client ID>", "<client secret>", "http://my-domain.org/redirect-url")
 with open("config.json", "r") as data_file:
     data = json.loads(data_file.read())
-session = FigoSession(data["token"])
+session = FigoSession(data["figo"]["token"])
 
 
 def get_accounts():
