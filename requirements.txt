@@ -10,6 +10,6 @@ requests==2.18.1
 requests-toolbelt==0.8.0
 six==1.10.0
 slackclient==1.0.6
-urllib3==1.21.1
+urllib3==1.26.5
 websocket-client==0.44.0
 wit==4.2.0
